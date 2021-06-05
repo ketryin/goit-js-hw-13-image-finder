@@ -6,8 +6,11 @@ import debounce from 'lodash.debounce';
 import { notice, error, defaultModules } from '@pnotify/core';
 import * as PNotifyMobile from '@pnotify/mobile';;
 import '@pnotify/core/dist/BrightTheme.css';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 defaultModules.set(PNotifyMobile, {});
+
 const refs = getRefs();
 refs.inputEl.addEventListener('input', debounce(searchImg, 500));
 let page = 1;
@@ -22,6 +25,7 @@ function searchImg(event) {
             .then(renderImg)
             .catch(errorMessage);
     }
+    refs.listEl.addEventListener('click',onClickImgOpenModal);
 }
 
 function renderImg(hits) {
@@ -57,4 +61,11 @@ function LoadMore() {
 function addrenderImg(hits) {
     const markup = hits.map(imgCardTpl).join('');
     refs.listEl.innerHTML += markup; 
+}
+function onClickImgOpenModal(event) {
+  if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  const instance = basicLightbox.create(`<img src="${event.target.dataset.src}" alt="" />`);
+  instance.show();
 }

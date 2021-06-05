@@ -53,3 +53,10 @@ li {
 .img {
   cursor: pointer;
 }
+.stats-item {
+  display: flex;
+  align-items: center;
+}
+.material-icons {
+  margin-right: 10px;
+}
