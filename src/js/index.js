@@ -16,7 +16,7 @@ refs.inputEl.addEventListener('input', debounce(searchImg, 500));
 let page = 1;
 let inputValue;
 function searchImg(event) {
-    inputValue = event.target.value;
+    inputValue = event.target.value.trim();
     refs.listEl.innerHTML = '';
     refs.btnContainerEl.innerHTML = '';
     page = 1;
